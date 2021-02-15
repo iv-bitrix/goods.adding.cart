@@ -1,0 +1,10 @@
+#smsn-goods-for-adding {
+	max-height: 70vh;
+}
+#smsn-preselect-list {
+	position: absolute;
+	max-height: 50vh;
+}
+#smsn-adding-item .form-control {
+	white-space: nowrap;
+}
