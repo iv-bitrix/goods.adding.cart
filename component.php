@@ -50,13 +50,15 @@ if (CModule::IncludeModule("iblock")) {
 				</div>
 				<div>
 					<div class="modal-body">
-						<div id="smsn-goods-for-adding" class="overflow-auto"></div>
+						<div id="smsn-goods-for-adding"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="smsn-btn-add-goods-to-cart" class="btn btn-primary"><?= GetMessage("SMSN_ADD_TO_CART") ?></button>
+						<button type="button" id="smsn-btn-add-goods-to-cart" class="btn btn-primary" data-dismiss="modal">
+							<?= GetMessage("SMSN_ADD_TO_CART") ?>
+						</button>
 					</div>
 				</div>
-				<div id="smsn-preselect-list" class="overflow-auto"></div>
+				<div id="smsn-preselect-list"></div>
 			</div>
 		</div>
 	</div>

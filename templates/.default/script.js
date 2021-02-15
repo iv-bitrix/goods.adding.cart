@@ -128,7 +128,7 @@ function addGoodsForAddingItem(groupId, item, itemClass) {
 			+ `<div class="form-control">${$(item).children('span').html()}</div>`
 			+ `<input type="number" value="1" class="smsn-quantity form-control col-3">`
 			+ `<div class="input-group-append">`
-			+ `<span class="btn input-group-text btn-outline-danger smsn-delete-item" data-parent-item-id="${itemId}">X</span>`
+			+ `<span class="input-group-text smsn-delete-item" data-parent-item-id="${itemId}">X</span>`
 			+ `</div>`
 			+ `</div>`;
 		$(groupId).prepend(itemHtml);

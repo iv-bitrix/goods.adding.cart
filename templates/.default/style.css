@@ -1,0 +1,20 @@
+#smsn-goods-for-adding {
+	max-height: 70vh;
+	overflow: auto;
+}
+
+#smsn-preselect-list {
+	position: absolute;
+	max-height: 40vh;
+	overflow: auto;
+}
+
+#smsn-goods-for-adding .form-control {
+	white-space: nowrap;
+}
+
+.smsn-delete-item:hover {
+	color: white;
+	background-color: #dc3545;
+	cursor: pointer;
+}
