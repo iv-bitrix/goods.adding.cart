@@ -29,7 +29,7 @@ $(document).ready(function () {
 		addGoodsForAddingItem('#smsn-goods-for-adding', this, 'smsn-adding-item');
 		if ($('#smsn-chbox-xmlid-clear').is(':checked')) {
 			$('#smsn-input-xmlid').val('');
-			fillGoodsList('', '#smsn-preselect-list', 'smsn-preselect-item');
+			fnClearHideContainer('#smsn-preselect-list');
 		}
 		//event.preventDefault();
 	});
@@ -40,8 +40,25 @@ $(document).ready(function () {
 		event.preventDefault();
 	});
 
+	// inspect adding goods quantity correctness
+	$(document).on('focusout', '.smsn-quantity', function (event) {
+		 if ($(this).val() < parseInt($(this).prop('min'))) {
+			$(this).val(parseInt($(this).prop('min')));
+		 }
+	});
 
 });
+
+/**
+ * function remove childs and hide element optionally by ID
+ * @param {string} container element ID
+ * @returns undefined
+ */
+// TODO 1) remove childs 1.1) hide optionally 2) clear .val() 
+function fnClearHideContainer(container) {
+	$(container).find('*').remove();
+	$(container).hide();
+};
 
 /**
  * function creates preselect list using goods where XML-ID includes xmlId
@@ -68,8 +85,7 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 			}
 		});
 	} else {
-		$(groupId).find('*').remove();
-		$(groupId).hide();
+		fnClearHideContainer(groupId);
 	}
 };
 
@@ -125,8 +141,8 @@ function addGoodsForAddingItem(groupId, item, itemClass) {
 			+ `<div class="input-group-prepend">`
 			+ `<span class="input-group-text">${$(item).children('strong').html()}</span>`
 			+ `</div>`
-			+ `<div class="form-control">${$(item).children('span').html()}</div>`
-			+ `<input type="number" value="1" class="smsn-quantity form-control col-3">`
+			+ `<input type="text" class="form-control" disabled value="${$(item).children('span').html()}">`
+			+ `<input type="number" value="1"  min="1" class="smsn-quantity form-control col-3">`
 			+ `<div class="input-group-append">`
 			+ `<span class="input-group-text smsn-delete-item" data-parent-item-id="${itemId}">X</span>`
 			+ `</div>`
