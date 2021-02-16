@@ -13,7 +13,7 @@ $(document).ready(function () {
 	});
 
 	//show XML-ID seek results
-	$('#smsn-input-xmlid').on('change keyup', function (event) {
+	$('#smsn-input-xmlid').on('keyup', function (event) {
 		fillGoodsList($('#smsn-input-xmlid').val(), '#smsn-preselect-list', 'smsn-preselect-item');
 		//event.preventDefault();
 	});
@@ -21,6 +21,10 @@ $(document).ready(function () {
 	// put goods list to a Cart
 	$('#smsn-btn-add-goods-to-cart').on('click', function (event) {
 		addGoodsToCart('#smsn-goods-for-adding', 'smsn-adding-item');
+		fnClear(
+			['#smsn-preselect-list', '#smsn-goods-for-adding'],
+			[{ elem: '#smsn-input-xmlid', prop: 'value' }]
+		);
 		event.preventDefault();
 	});
 
@@ -28,8 +32,10 @@ $(document).ready(function () {
 	$(document).on('click', '.smsn-preselect-item', function (event) {
 		addGoodsForAddingItem('#smsn-goods-for-adding', this, 'smsn-adding-item');
 		if ($('#smsn-chbox-xmlid-clear').is(':checked')) {
-			$('#smsn-input-xmlid').val('');
-			fnClearHideContainer('#smsn-preselect-list');
+			fnClear(
+				['#smsn-preselect-list'],
+				[{ elem: '#smsn-input-xmlid', prop: 'value' }]
+			);
 		}
 		//event.preventDefault();
 	});
@@ -42,22 +48,28 @@ $(document).ready(function () {
 
 	// inspect adding goods quantity correctness
 	$(document).on('focusout', '.smsn-quantity', function (event) {
-		 if ($(this).val() < parseInt($(this).prop('min'))) {
+		if ($(this).val() < parseInt($(this).prop('min'))) {
 			$(this).val(parseInt($(this).prop('min')));
-		 }
+		}
 	});
 
 });
 
 /**
- * function remove childs and hide element optionally by ID
- * @param {string} container element ID
+ * function removes element childs optionally by CSS selector
+ * clears properties
+ * @param {Array(string)} containers array of elements CSS selectors which childs will be removed
+ * @param {Array({elem:string, prop:string})} elements array of pairs (element, property) for clear properties
  * @returns undefined
+ * @example fnClear(['.container', '#memo'], [{elem:'#form input[type=text]', prop:'value'}])
  */
-// TODO 1) remove childs 1.1) hide optionally 2) clear .val() 
-function fnClearHideContainer(container) {
-	$(container).find('*').remove();
-	$(container).hide();
+function fnClear(containers = [], elements = []) {
+	containers.forEach(item => {
+		$(item).find('*').remove();
+	});
+	elements.forEach(item => {
+		$(item.elem).prop(item.prop, '');
+	});
 };
 
 /**
@@ -85,7 +97,8 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 			}
 		});
 	} else {
-		fnClearHideContainer(groupId);
+		fnClear([groupId]);
+		$(groupId).hide();
 	}
 };
 
@@ -98,7 +111,6 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 function fnSetPositionPopUpForm(formId) {
 	var obj = $(formId);
 	var anchor = $(formId + '-anchor');
-	//obj.css('position', 'fixed');
 	obj.offset({ top: 0, left: 0 });
 	obj.offset(anchor.offset());
 }
