@@ -21,7 +21,7 @@ $arResult['DATE'] = '';
 if (CModule::IncludeModule("iblock")) {
 ?>
 	<!-- Button trigger MultipleAddingToCart modal form -->
-	<button type="button" id="smsn-btn-multiple-goods" class="btn btn-primary" data-toggle="modal" data-target="#smsn-form-multiple-goods">
+	<button type="button" class="smsn-btn-multiple-goods btn btn-primary" data-toggle="modal" data-target="#smsn-form-multiple-goods">
 		GO
 	</button>
 	<!-- MultipleAddingToCart modal form -->
