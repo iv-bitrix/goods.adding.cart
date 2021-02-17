@@ -1,18 +1,13 @@
 
 "use strict";
 
+// min count of the symbols to start seeking goods
 var minSearchLetters = 2;
 
 // set event handlers after full load DOM elements
 $(document).ready(function () {
 
-	// XML-ID seek results PopUp form (preselect list) position set
-	$('#smsn-form-multiple-goods').on('focus', function (event) {
-		fnSetPositionPopUpForm('#smsn-preselect-list');
-		//event.preventDefault();
-	});
-
-	//show XML-ID seek results - preselect list
+	// show XML-ID seek results - preselect list
 	$('#smsn-input-xmlid').on('keyup', function (event) {
 		fillGoodsList($('#smsn-input-xmlid').val(), '#smsn-preselect-list', 'smsn-preselect-item');
 		//event.preventDefault();
@@ -82,9 +77,9 @@ function fnClear(containers = [], elements = []) {
 
 /**
  * function creates preselect list using goods where XML-ID includes xmlId
- * @param xmlId string get part of XML-ID for seek
- * @param groupId string element ID of seek result box
- * @param itemClass string CSS class of found XML-ID equals elements
+ * @param {string} xmlId get part of XML-ID for seek
+ * @param {string} groupId element ID of seek result box
+ * @param {string} itemClass CSS class of found XML-ID equals elements
  * @returns undefined
  */
 function fillGoodsList(xmlId, groupId, itemClass) {
@@ -100,8 +95,9 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 			//console.log(response);
 			if (response['errors'].length == 0) {
 				if (fnCreateHtmlList(groupId, response['data'], itemClass) > 0) {
+					//* at first: show; at second: set position
 					$(groupId).show();
-					$(groupId).focus();
+					fnSetPositionPopUpForm(groupId);
 				};
 			}
 		});
@@ -113,22 +109,19 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 /**
  * function set PopUpForm position relatively anchor
  * anchor is the eltment which have an ID {PopUpForm_ID}+'-anchor'
- * @param formId string PopUpForm ID
+ * @param {string} formId PopUpForm ID
  * @returns undefined;
  */
 function fnSetPositionPopUpForm(formId) {
-	var obj = $(formId);
-	var anchor = $(formId + '-anchor');
-	obj.offset({ top: 0, left: 0 });
-	obj.offset(anchor.offset());
+	$(formId).offset($(formId + '-anchor').offset());
 }
 
 
 /**
  * function fills the items conteiner by arGoods records
- * @param arGoods array of catalog items as array(ID, XML_ID, NAME)
- * @param groupId string items container css selector
- * @param itemClass string items class name
+ * @param {array(ID, XML_ID, NAME)} arGoods array of catalog items
+ * @param {string} groupId items container css selector
+ * @param {string} itemClass items class name
  * @returns count of found items
  */
 function fnCreateHtmlList(groupId, arGoods, itemClass) {
@@ -145,9 +138,9 @@ function fnCreateHtmlList(groupId, arGoods, itemClass) {
 
 /**
  * function moves a goods item from the preselect group to the adding group
- * @param groupId string items container ID
- * @param item item from preselect list
- * @param itemClass string new items class name
+ * @param {string} groupId items container CSS selector
+ * @param {object} item preselect list item
+ * @param {string} itemClass new items class name
  * @returns undefined
  */
 function addGoodsForAddingItem(groupId, item, itemClass) {
@@ -172,10 +165,10 @@ function addGoodsForAddingItem(groupId, item, itemClass) {
 }
 
 /**
- * function send list of goods to server for adding to the Cart
- * @param groupId string goods list container ID
- * @param itemClass string items class name
- * @returns array of result comments
+ * function send a list of goods to server for adding to the Cart
+ * @param {string} groupId goods list container ID
+ * @param {string} itemClass items class name
+ * @returns {array} result comments
  */
 function addGoodsToCart(groupId, itemClass) {
 	var arGoods = [];
@@ -202,8 +195,8 @@ function addGoodsToCart(groupId, itemClass) {
 
 /**
  * function removes a goods item from the adding group
- * @param groupId string items container ID
- * @param item event sender has information about item ID to remove from the list
+ * @param {string} groupId items container CSS selector
+ * @param {object} item an event sender has information about item ID to remove from the list
  * @returns undefined
  */
 function deleteGoodsFromAddingItem(groupId, item) {
