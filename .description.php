@@ -11,9 +11,9 @@ $arComponentDescription = array(
 		// 1 level name in components tree
 		"NAME" => GetMessage("SMSN_GROUP_TITLE"),
 		"CHILD" => array(
-			"ID" => "goods_adding_cart",
+			"ID" => "goods_components",
 			// 2 level name in components tree
-			"NAME" => GetMessage("SMSN_CART_PARENT_TITLE")
+			"NAME" => GetMessage("SMSN_GOODS_COMPONENTS_GROUP_TITLE")
 		)
 	),
 );

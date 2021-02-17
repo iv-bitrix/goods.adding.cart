@@ -1,11 +1,4 @@
 
-/* inspect including style.css*/
-p {
-	color: red !important;
-}
-/* END inspection */
-
-
 #smsn-goods-for-adding {
 	max-height: 70vh;
 	overflow: auto;
@@ -30,5 +23,9 @@ p {
 .smsn-delete-item:hover {
 	color: white;
 	background-color: #dc3545;
+	cursor: pointer;
+}
+
+.smsn-preselect-item {
 	cursor: pointer;
 }
