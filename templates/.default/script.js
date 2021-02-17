@@ -6,13 +6,13 @@ var minSearchLetters = 2;
 // set event handlers after full load DOM elements
 $(document).ready(function () {
 
-	// XML-ID seek results PopUp form position set
+	// XML-ID seek results PopUp form (preselect list) position set
 	$('#smsn-form-multiple-goods').on('focus', function (event) {
 		fnSetPositionPopUpForm('#smsn-preselect-list');
 		//event.preventDefault();
 	});
 
-	//show XML-ID seek results
+	//show XML-ID seek results - preselect list
 	$('#smsn-input-xmlid').on('keyup', function (event) {
 		fillGoodsList($('#smsn-input-xmlid').val(), '#smsn-preselect-list', 'smsn-preselect-item');
 		//event.preventDefault();
@@ -28,6 +28,14 @@ $(document).ready(function () {
 		event.preventDefault();
 	});
 
+	// hide preselect list on focusout event
+	$(document).mouseup(function (e) {
+		var popup = $('#smsn-preselect-list');
+		if (!popup.is(e.target) && popup.has(e.target).length === 0) {
+			popup.hide();
+		};
+	});
+
 	// add item to goods list for adding to a Cart
 	$(document).on('click', '.smsn-preselect-item', function (event) {
 		addGoodsForAddingItem('#smsn-goods-for-adding', this, 'smsn-adding-item');
@@ -40,7 +48,7 @@ $(document).ready(function () {
 		//event.preventDefault();
 	});
 
-	// delete item to goods list for adding to a Cart
+	// delete an item from the goods list for adding to a Cart
 	$(document).on('click', '.smsn-delete-item', function (event) {
 		deleteGoodsFromAddingItem('#smsn-goods-for-adding', this);
 		event.preventDefault();
@@ -93,12 +101,12 @@ function fillGoodsList(xmlId, groupId, itemClass) {
 			if (response['errors'].length == 0) {
 				if (fnCreateHtmlList(groupId, response['data'], itemClass) > 0) {
 					$(groupId).show();
+					$(groupId).focus();
 				};
 			}
 		});
 	} else {
 		fnClear([groupId]);
-		$(groupId).hide();
 	}
 };
 
