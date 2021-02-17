@@ -8,14 +8,13 @@
 // TODO .gif
 // TODO SEF mode
 // TODO cache
-// TODO param add count of lines in PRESELECT for scrolling (overflow)
 // TODO param add timeout for ajax start (script.js)
-// TODO add price and summ
+// TODO add price and summ optionally
 // TODO vue elements adding
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-$arResult['DATE'] = '';
+// $arResult['DATE'] = '';
 
 // Компонент отработает только при успешном подключении модуля Инфоблоков
 if (CModule::IncludeModule("iblock")) {

@@ -7,6 +7,13 @@ var minSearchLetters = 2;
 // set event handlers after full load DOM elements
 $(document).ready(function () {
 
+	// add an information to the placeholder about min count of the symbols to start seeking goods
+	fnUpdateElementProperty(
+		$('#smsn-input-xmlid'),
+		'placeholder',
+		`${minSearchLetters}`
+	);
+
 	// show XML-ID seek results - preselect list
 	$('#smsn-input-xmlid').on('keyup', function (event) {
 		fillGoodsList($('#smsn-input-xmlid').val(), '#smsn-preselect-list', 'smsn-preselect-item');
@@ -16,6 +23,7 @@ $(document).ready(function () {
 	// put goods list to a Cart
 	$('#smsn-btn-add-goods-to-cart').on('click', function (event) {
 		addGoodsToCart('#smsn-goods-for-adding', 'smsn-adding-item');
+		// clear the modal form
 		fnClear(
 			['#smsn-preselect-list', '#smsn-goods-for-adding'],
 			[{ elem: '#smsn-input-xmlid', prop: 'value' }]
@@ -59,7 +67,18 @@ $(document).ready(function () {
 });
 
 /**
- * function removes element childs optionally by CSS selector
+ * the function uppends data to the property of the element
+ * @param {object} element the property owner
+ * @param {property}} property the property to uppend
+ * @param {addData} addData the data to uppend
+ * @returns undefined
+ */
+function fnUpdateElementProperty(element, property, addData) {
+	element.prop(property, element.prop(property) + addData);
+}
+
+/**
+ * the function removes element childs optionally by CSS selector
  * clears properties
  * @param {Array(string)} containers array of elements CSS selectors which childs will be removed
  * @param {Array({elem:string, prop:string})} elements array of pairs (element, property) for clear properties
