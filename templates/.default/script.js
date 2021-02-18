@@ -48,7 +48,7 @@ $(document).ready(function () {
 				[{ elem: '#smsn-input-xmlid', prop: 'value' }]
 			);
 		}
-		//event.preventDefault();
+		event.preventDefault();
 	});
 
 	// delete an item from the goods list for adding to a Cart
@@ -166,10 +166,10 @@ function addGoodsForAddingItem(groupId, item, itemClass) {
 	var itemId = item.dataset.itemId;
 	var exists = $(groupId).find(`[data-item-id="${itemId}"]`);
 	if (exists.length) {
-		let quantity = exists.find('.smsn-quantity');
+		var quantity = exists.find('.smsn-quantity');
 		quantity.val(parseInt(quantity.val()) + 1);
 	} else {
-		let itemHtml = `<div class="${itemClass} input-group" data-item-id="${itemId}">`
+		var itemHtml = `<div class="${itemClass} input-group" data-item-id="${itemId}">`
 			+ `<div class="input-group-prepend">`
 			+ `<span class="input-group-text">${$(item).children('strong').html()}</span>`
 			+ `</div>`
