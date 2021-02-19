@@ -1,14 +1,14 @@
 
-#smsn-goods-for-adding {
+#smsn_goods_for_adding {
 	max-height: 70vh;
 	overflow: auto;
 }
 
-#smsn-goods-for-adding .form-control {
+#smsn_goods_for_adding .form-control {
 	white-space: nowrap;
 }
 
-#smsn-preselect-list {
+#smsn_preselect_list {
 	position: absolute;
 	max-height: 40vh;
 	overflow: auto;

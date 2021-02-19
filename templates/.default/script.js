@@ -9,31 +9,31 @@ $(document).ready(function () {
 
 	// add an information to the placeholder about min count of the symbols to start seeking goods
 	fnUpdateElementProperty(
-		$('#smsn-input-xmlid'),
+		$('#smsn_input_xmlid'),
 		'placeholder',
 		`${minSearchLetters}`
 	);
 
 	// show XML-ID seek results - preselect list
-	$('#smsn-input-xmlid').on('keyup', function (event) {
-		fillGoodsList($('#smsn-input-xmlid').val(), '#smsn-preselect-list', 'smsn-preselect-item');
+	$('#smsn_input_xmlid').on('keyup', function (event) {
+		fillGoodsList($('#smsn_input_xmlid').val(), '#smsn_preselect_list', 'smsn-preselect-item');
 		//event.preventDefault();
 	});
 
 	// put goods list to a Cart
-	$('#smsn-btn-add-goods-to-cart').on('click', function (event) {
-		addGoodsToCart('#smsn-goods-for-adding', 'smsn-adding-item');
+	$('#smsn_btn_add_goods_to_cart').on('click', function (event) {
+		addGoodsToCart('#smsn_goods_for_adding', 'smsn-adding-item');
 		// clear the modal form
 		fnClear(
-			['#smsn-preselect-list', '#smsn-goods-for-adding'],
-			[{ elem: '#smsn-input-xmlid', prop: 'value' }]
+			['#smsn_preselect_list', '#smsn_goods_for_adding'],
+			[{ elem: '#smsn_input_xmlid', prop: 'value' }]
 		);
 		event.preventDefault();
 	});
 
 	// hide preselect list on focusout event
 	$(document).mouseup(function (e) {
-		var popup = $('#smsn-preselect-list');
+		var popup = $('#smsn_preselect_list');
 		if (!popup.is(e.target) && popup.has(e.target).length === 0) {
 			popup.hide();
 		};
@@ -41,11 +41,11 @@ $(document).ready(function () {
 
 	// add item to goods list for adding to a Cart
 	$(document).on('click', '.smsn-preselect-item', function (event) {
-		addGoodsForAddingItem('#smsn-goods-for-adding', this, 'smsn-adding-item');
-		if ($('#smsn-chbox-xmlid-clear').is(':checked')) {
+		addGoodsForAddingItem('#smsn_goods_for_adding', this, 'smsn-adding-item');
+		if ($('#smsn_chbox_xmlid_clear').is(':checked')) {
 			fnClear(
-				['#smsn-preselect-list'],
-				[{ elem: '#smsn-input-xmlid', prop: 'value' }]
+				['#smsn_preselect_list'],
+				[{ elem: '#smsn_input_xmlid', prop: 'value' }]
 			);
 		}
 		event.preventDefault();
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 	// delete an item from the goods list for adding to a Cart
 	$(document).on('click', '.smsn-delete-item', function (event) {
-		deleteGoodsFromAddingItem('#smsn-goods-for-adding', this);
+		deleteGoodsFromAddingItem('#smsn_goods_for_adding', this);
 		event.preventDefault();
 	});
 
@@ -132,7 +132,7 @@ function fillGoodsList(xmlId, groupId, itemClass) {
  * @returns undefined;
  */
 function fnSetPositionPopUpForm(formId) {
-	$(formId).offset($(formId + '-anchor').offset());
+	$(formId).offset($(formId + '_anchor').offset());
 }
 
 
