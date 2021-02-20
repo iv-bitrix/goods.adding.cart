@@ -4,11 +4,15 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 CJSCore::Init(array('bx', 'jquery', 'ajax'));
 
 // Компонент отработает только при успешном подключении модуля Инфоблоков
+// TODO make $btnStyle class params
+//$btnStyle = 'btn-primary';
+$btnStyle = 'btn-link';
+
 if (CModule::IncludeModule("iblock")) {
 ?>
 	<!-- Button trigger MultipleAddingToCart modal form -->
-	<button type="button" class="smsn-btn-multiple-goods btn btn-primary" data-toggle="modal" data-target="#smsn_form_multiple_goods">
-		GO
+	<button type="button" class="smsn-btn-multiple-goods btn <?= $btnStyle ?>" data-toggle="modal" data-target="#smsn_form_multiple_goods">
+		<?= GetMessage("SMSN_CART_BUTTON_CAPTION") ?>
 	</button>
 	<!-- MultipleAddingToCart modal form -->
 	<div id="smsn_form_multiple_goods" class="modal fade" tabindex="-1" aria-hidden="true">
