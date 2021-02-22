@@ -33,7 +33,8 @@ class CGoods extends \Bitrix\Main\Engine\Controller
 	public function getGoodsListAction($xmlId = 'none')
 	{
 		// TODO create param for IBLOCK_ID filter
-		$arIBlockId = ['3'];	// permissible IBLOCK_ID for preselect goods
+		// permissible IBLOCK_IDs for preselect products
+		$arIBlockId = ['3'];
 
 		$arItems = array();			// result array
 		// TODO make configurable SQL filter by the checkbox: %xmlId or %xmlId%

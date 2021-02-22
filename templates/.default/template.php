@@ -9,7 +9,9 @@ if (CModule::IncludeModule('iblock')) {
 	//set the style of the button that opens a modal form for group adding goods
 	$btnStyle = isset($arParams['CART_BUTTON_STYLE']) ? $arParams['CART_BUTTON_STYLE'] : 'btn-link';
 	//default value of minimum symbols to start seeking is 2
-	$symbolCount = isset($arParams['START_SEEK_SYMBOL_COUNT']) ? $arParams['START_SEEK_SYMBOL_COUNT'] : 2;
+	if (($symbolCount = intval($arParams['START_SEEK_SYMBOL_COUNT'])) <1) {
+		$symbolCount = 2;
+	}
 
 ?>
 	<!-- Button trigger MultipleAddingToCart modal form -->
