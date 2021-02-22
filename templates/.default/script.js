@@ -1,9 +1,6 @@
 
 "use strict";
 
-// min count of the symbols to start seeking goods
-var minSearchLetters = 2;
-
 // set event handlers after full load DOM elements
 $(document).ready(function () {
 
@@ -11,12 +8,13 @@ $(document).ready(function () {
 	fnUpdateElementProperty(
 		$('#smsn_input_xmlid'),
 		'placeholder',
-		`${minSearchLetters}`
+		`${document.getElementById('smsn_input_xmlid').dataset.seekSymbolCount}`
 	);
 
 	// show XML-ID seek results - preselect list
 	$('#smsn_input_xmlid').on('keyup', function (event) {
-		fillGoodsList($('#smsn_input_xmlid').val(), '#smsn_preselect_list', 'smsn-preselect-item');
+		console.log('func');
+		fillGoodsList(this, '#smsn_preselect_list', 'smsn-preselect-item');
 		//event.preventDefault();
 	});
 
@@ -96,12 +94,15 @@ function fnClear(containers = [], elements = []) {
 
 /**
  * function creates preselect list using goods where XML-ID includes xmlId
- * @param {string} xmlId get part of XML-ID for seek
+ * @param {element} element input which holds part of XML-ID for seek
  * @param {string} groupId element ID of seek result box
  * @param {string} itemClass CSS class of found XML-ID equals elements
  * @returns undefined
  */
-function fillGoodsList(xmlId, groupId, itemClass) {
+function fillGoodsList(element, groupId, itemClass) {
+	var xmlId = $(element).val(); //xmlId gets part of XML-ID for seek
+	var minSearchLetters = parseInt(element.dataset.seekSymbolCount); // min count of the symbols to start seeking goods
+
 	// start seeking after get more then minimum count of XML-ID symbols
 	// else hide result box
 	if (xmlId.length >= minSearchLetters) {
