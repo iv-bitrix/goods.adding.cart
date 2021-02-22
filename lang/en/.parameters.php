@@ -1,3 +1,2 @@
-<?
-$MESS["SMSN_SOME_TEXT"] = "Nothing";
-?>
+<?php
+$MESS['SMSN_CART_BUTTON_STILE_PARAM_CAPTION'] = 'Button style';
