@@ -1,26 +1,26 @@
 <?php
 #components/bitrix/example/ajax.php
 
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
-\Bitrix\Main\Loader::IncludeModule("iblock");
+\Bitrix\Main\Loader::IncludeModule('iblock');
 \Bitrix\Main\Loader::includeModule('sale');
 \Bitrix\Main\Loader::includeModule('catalog');
 
 class CGoods extends \Bitrix\Main\Engine\Controller
 {
 
-	// Обязательный метод
+	// Reconfigure Actions
 	public function configureActions()
 	{
-		// Сбрасываем фильтры по-умолчанию (ActionFilter\Authentication и ActionFilter\HttpMethod)
-		// Предустановленные фильтры находятся в папке /bitrix/modules/main/lib/engine/actionfilter/
+		// Reset the default filters (ActionFilter\Authentication и ActionFilter\HttpMethod)
+		// The preset filters are in the folder: /bitrix/modules/main/lib/engine/actionfilter/
 		return [
-			'getGoodsList' => [ // Ajax-метод
-				'prefilters' => [],
+			'getGoodsList' => [			// Ajax-method getGoodsListAction
+				'prefilters' => [],		// reset filters
 			],
-			'addGoodsToCart' => [ // Ajax-метод
-				'prefilters' => [],
+			'addGoodsToCart' => [		// Ajax-method addGoodsToCartAction
+				'prefilters' => [],		// reset filters
 			],
 		];
 	}
@@ -36,10 +36,11 @@ class CGoods extends \Bitrix\Main\Engine\Controller
 		$arIBlockId = ['3'];	// permissible IBLOCK_ID for preselect goods
 
 		$arItems = array();			// result array
-		$arFilter = array("IBLOCK_ID" => $arIBlockId, 'XML_ID' => "%{$xmlId}%", "ACTIVE" => "Y");
+		// TODO make configurable SQL filter by the checkbox: %xmlId or %xmlId%
+		$arFilter = array('IBLOCK_ID' => $arIBlockId, 'XML_ID' => "%{$xmlId}%", 'ACTIVE' => 'Y');
 		$arSelect = array('ID', 'PRODUCT_ID', 'XML_ID', 'NAME');
 		$goods = CIBlockElement::GetList(
-			array("ID" => "ASC"),
+			array('ID' => 'ASC'),
 			$arFilter,
 			false,
 			false,

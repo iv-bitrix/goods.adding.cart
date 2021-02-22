@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 
 // set event handlers after full load DOM elements
 $(document).ready(function () {
